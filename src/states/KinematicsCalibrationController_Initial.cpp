@@ -4,6 +4,9 @@
 
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/io_utils.h>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 void KinematicsCalibrationController_Initial::configure(const mc_rtc::Configuration & config)
 {
@@ -19,15 +22,16 @@ void KinematicsCalibrationController_Initial::start(mc_control::fsm::Controller 
 
   // Get default logger path in user's .local/share
   const char * home = std::getenv("HOME");
-  std::string dir;
+  fs::path dir;
   if(home)
   {
-    dir = std::string(home) + "/.local/share/mc-rtc/controllers/KinematicsCalibrationController";
+    dir = fs::path{home} / ".local/share/mc-rtc/controllers";
   }
   else
   {
-    dir = "/tmp/mc-rtc/controllers/KinematicsCalibrationController";
+    dir = fs::path{"/tmp/mc-rtc/controllers"};
   }
+  dir = dir / "KinematicsCalibrationController" / robot_;
 
   // Create async logger
   for(const auto & hole : holes)
@@ -36,7 +40,7 @@ void KinematicsCalibrationController_Initial::start(mc_control::fsm::Controller 
     {
       // dir/robot/position/hole_<num>.csv
       auto loggerName = fmt::format("{}/{}", position, hole);
-      auto loggerPath = fmt::format("{}/{}.csv", dir, loggerName);
+      auto loggerPath = fmt::format("{}/{}.csv", dir.string(), loggerName);
       mc_rtc::log::info("Creating async logger for hole {} at path {}", loggerName, loggerPath);
       auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(loggerPath, true);
       auto [loggerElem, success] = holeLogger_.emplace(loggerName, std::make_shared<spdlog::logger>(loggerName, sink));
@@ -62,7 +66,8 @@ void KinematicsCalibrationController_Initial::start(mc_control::fsm::Controller 
         KinematicsCalibrationController_Initial::holes,
         [this]() { return hole_; }, [this](const std::string & hole) { hole_ = hole; }),
       Button("Add data", [this, &ctl]() { addHoleData(ctl); }),
-      Button("Save and exit", [this]() { saveAndExit(); })
+      Button("Save (async)", [this]() { asyncSave(true); }),
+      Button("Exit", [this]() { asyncSave(); running_ = false; })
       );
 }
 
@@ -70,6 +75,12 @@ bool KinematicsCalibrationController_Initial::run(mc_control::fsm::Controller & 
 {
   auto & ctl = static_cast<KinematicsCalibrationController &>(ctl_);
   output("OK");
+
+  if(++iter_ % saveIterRate_ == 0)
+  {
+    asyncSave(false);
+  }
+
   return running_;
 }
 
@@ -77,7 +88,7 @@ void KinematicsCalibrationController_Initial::teardown(mc_control::fsm::Controll
 {
   auto & ctl = static_cast<KinematicsCalibrationController &>(ctl_);
   ctl.gui()->removeElements(this);
-  saveAndExit();
+  asyncSave(true);
 }
 
 
@@ -89,12 +100,11 @@ void KinematicsCalibrationController_Initial::addHoleData(mc_control::fsm::Contr
   holeLogger_[loggerName]->info("{}", mc_rtc::io::to_string(ctl.realRobot(robot_).encoderValues(), ","));
 };
 
-void KinematicsCalibrationController_Initial::saveAndExit()
+void KinematicsCalibrationController_Initial::asyncSave(bool show)
 {
-  running_ = false;
   for(auto & [_, logger] : holeLogger_)
   {
-    mc_rtc::log::info("Flushing logger {}", logger->name());
+    if(show) { mc_rtc::log::info("Requesting async logger flush {}", logger->name()); }
     logger->flush();
   }
 }

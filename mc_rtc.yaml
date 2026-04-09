@@ -1,6 +1,7 @@
 MainRobot:
-  name: "panda_femur"
-  module: "PandaDefault"
+  name: panda_femur
+  module: Panda2LIRMM_FR1_Mukca_Table2_Calibrated
+
 Enabled: KinematicsCalibrationController
 Timestep: 0.001
 

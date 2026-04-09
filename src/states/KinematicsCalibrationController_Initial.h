@@ -23,7 +23,10 @@ struct KinematicsCalibrationController_Initial : mc_control::fsm::State
   void teardown(Controller & ctl) override;
 
   void addHoleData(Controller & ctl);
-  void saveAndExit();
+  /**
+   * Flush all async loggers
+   */
+  void asyncSave(bool show = false);
 
   protected:
     bool running_ = true;
@@ -34,4 +37,7 @@ struct KinematicsCalibrationController_Initial : mc_control::fsm::State
     std::string hole_ = holes.front();
     std::string position_ = positions.front();
     std::map<std::string, std::shared_ptr<spdlog::logger>> holeLogger_;
+
+    unsigned int iter_ = 0;
+    unsigned saveIterRate_ = 5 * 1000; // flush every 5s running at 1ms timestep
 };
