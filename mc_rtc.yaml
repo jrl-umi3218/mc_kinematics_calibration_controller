@@ -5,11 +5,6 @@ MainRobot:
 Enabled: KinematicsCalibrationController
 Timestep: 0.001
 
-ControllerModulePaths: ["/home/arnaud/devel/mc-rtc-nix/install/lib64/mc_controller"]
-RobotModulePaths: ["/home/arnaud/devel/mc-rtc-nix/install/lib64/mc_robots"]
-ObserverModulePaths: ["/home/arnaud/devel/mc-rtc-nix/install/lib64/mc_observers"]
-GlobalPluginPaths: ["/home/arnaud/devel/mc-rtc-nix/install/lib64/mc_plugins"]
-
 # Franka specific configuration
 Franka:
   ShowNetworkWarnings: true # If true (default), show warning messages about missing network data

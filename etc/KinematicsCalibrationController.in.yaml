@@ -47,7 +47,7 @@ transitions:
 init: KinematicsCalibrationController_Initial
 
 ObserverPipelines:
- - name: EncoderObserver 
+ - name: EncoderObserver
    observers:
    - type: Encoder
      name: panda_femur_calibrated_encoder
@@ -71,4 +71,3 @@ ObserverPipelines:
      updateRobot: panda_tibia_original
      position: encoderValues
      velocity: encoderVelocities
-

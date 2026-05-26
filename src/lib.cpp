@@ -1,3 +1,4 @@
 #include "KinematicsCalibrationController.h"
 
-CONTROLLER_CONSTRUCTOR("KinematicsCalibrationController", KinematicsCalibrationController)
+CONTROLLER_CONSTRUCTOR("KinematicsCalibrationController",
+                       KinematicsCalibrationController)

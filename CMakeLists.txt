@@ -11,15 +11,23 @@ project(${PROJECT_NAME} CXX)
 
 # Check if the project is built inside mc_rtc
 if(NOT TARGET mc_rtc::mc_control)
-  find_package(mc_rtc REQUIRED)
+    find_package(mc_rtc REQUIRED)
 endif()
 
 add_subdirectory(src)
 
 set(AROBASE "@")
-configure_file(etc/KinematicsCalibrationController.in.yaml "${CMAKE_CURRENT_BINARY_DIR}/etc/KinematicsCalibrationController.yaml")
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/etc/KinematicsCalibrationController.yaml" DESTINATION "${MC_CONTROLLER_RUNTIME_INSTALL_PREFIX}/etc")
+configure_file(
+    etc/KinematicsCalibrationController.in.yaml
+    "${CMAKE_CURRENT_BINARY_DIR}/etc/KinematicsCalibrationController.yaml"
+)
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/etc/KinematicsCalibrationController.yaml"
+    DESTINATION "${MC_CONTROLLER_RUNTIME_INSTALL_PREFIX}/etc"
+)
 
 # Per-robot controller-specific configurations
-install(FILES etc/controllers/KinematicsCalibrationController/panda.yaml
-  DESTINATION ${MC_CONTROLLER_RUNTIME_INSTALL_PREFIX}/KinematicsController/)
+install(
+    FILES etc/controllers/KinematicsCalibrationController/panda.yaml
+    DESTINATION ${MC_CONTROLLER_RUNTIME_INSTALL_PREFIX}/KinematicsController/
+)
