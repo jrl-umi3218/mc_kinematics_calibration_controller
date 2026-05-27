@@ -1312,6 +1312,23 @@
         "type": "github"
       }
     },
+    "mc-franka": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773149028,
+        "narHash": "sha256-W1kSR1M6mHx7L67VZIwKaniKPDkRcS4i2v8dncgzA4Q=",
+        "owner": "jrl-umi3218",
+        "repo": "mc_franka",
+        "rev": "bc25827bb14ec0bc326e2ec54629bbcf04bdb26d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jrl-umi3218",
+        "ref": "pull/12/head",
+        "repo": "mc_franka",
+        "type": "github"
+      }
+    },
     "mc-panda": {
       "inputs": {
         "flake-parts": [
@@ -1357,11 +1374,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779800296,
-        "narHash": "sha256-aCUS39JH4iMPtLnfuODyb9ZfIsjcH2G+AYeLx1u3i4Q=",
+        "lastModified": 1779887182,
+        "narHash": "sha256-ZfuzySEfzr6MQPJGHQf7/7LoEy+wpYCfErFkqPJMvhM=",
         "owner": "jrl-umi3218",
         "repo": "mc_panda_lirmm",
-        "rev": "cb8c5cdd56c5c980b3a8a93d91caebe19e2d8d94",
+        "rev": "449b8e1832cbc79490e3b784d381d3c0e731f6e7",
         "type": "github"
       },
       "original": {
@@ -2360,6 +2377,7 @@
           "mc-rtc-nix",
           "flake-parts"
         ],
+        "mc-franka": "mc-franka",
         "mc-panda": "mc-panda",
         "mc-panda-lirmm": "mc-panda-lirmm",
         "mc-rtc-nix": "mc-rtc-nix_4",

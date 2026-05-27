@@ -19,7 +19,8 @@ VerboseStateFactory: false
 # Additional robots to load
 robots:
   panda_femur_original:
-    module: Panda2LIRMM_FR1_Mukca_Table2
+    #module: Panda2LIRMM_FR1_Mukca_Table2
+    module: PandaGanesh_FR1_Mukca
   panda_tibia_original:
     module: Panda7LIRMM_FR1_Mukca_Table2
   panda_tibia:
@@ -60,14 +61,14 @@ ObserverPipelines:
      updateRobot: panda_femur_original
      position: encoderValues
      velocity: encoderVelocities
-   - type: Encoder
-     name: panda_tibia_calibrated_encoder
-     robot: panda_tibia
-     position: encoderValues
-     velocity: encoderVelocities
-   - type: Encoder
-     name: panda_tibia_original_encoder
-     robot: panda_tibia
-     updateRobot: panda_tibia_original
-     position: encoderValues
-     velocity: encoderVelocities
+   # - type: Encoder
+   #   name: panda_tibia_calibrated_encoder
+   #   robot: panda_tibia
+   #   position: encoderValues
+   #   velocity: encoderVelocities
+   # - type: Encoder
+   #   name: panda_tibia_original_encoder
+   #   robot: panda_tibia
+   #   updateRobot: panda_tibia_original
+   #   position: encoderValues
+   #   velocity: encoderVelocities

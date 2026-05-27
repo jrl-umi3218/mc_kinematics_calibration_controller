@@ -7,6 +7,8 @@
     systems.follows = "mc-rtc-nix/systems";
     mc-panda-lirmm.url = "github:jrl-umi3218/mc_panda_lirmm/pull/16/head";
     mc-panda.url = "github:jrl-umi3218/mc_panda/pull/17/head";
+    mc-franka.url = "github:jrl-umi3218/mc_franka/pull/12/head";
+    mc-franka.flake = false;
   };
 
   outputs =
@@ -55,6 +57,10 @@
                   };
               };
 
+              overrideAttrs.mc-franka = {
+                src = inputs.mc-franka;
+              };
+
               overrideAttrs.mc-panda = {
                 src = inputs.mc-panda;
               };
@@ -84,7 +90,11 @@
                     # configs = [ "${pkgs-final.polytopeController}/lib/mc_controller/etc/mc_rtc.yaml" ];
                     # plugins = [ pkgs-final.mc-force-shoe-plugin ];
                     # observers = [ pkgs-final.mc-state-observation ];
-                    # apps = [];
+                    apps = with pkgs-final; [
+                      mc-franka
+                      mc-rtc-ticker
+                      mc-rtc-magnum
+                    ];
                   };
                 };
 
