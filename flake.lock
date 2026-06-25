@@ -1344,11 +1344,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776445386,
-        "narHash": "sha256-OAps22tMm+ByKHgSd00LgQPYtHdbz5LmpOfB07iWgB8=",
+        "lastModified": 1781548118,
+        "narHash": "sha256-8j0gPbcz7CAzcs845Nhr4p18sBd+QpEop87GfvjPRFA=",
         "owner": "jrl-umi3218",
         "repo": "mc_panda",
-        "rev": "37633f56837b8f2c0594923c266224dad7e35f38",
+        "rev": "399a13549b5266115374e099a66d7438cee35b9a",
         "type": "github"
       },
       "original": {
