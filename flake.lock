@@ -1315,11 +1315,11 @@
     "mc-franka": {
       "flake": false,
       "locked": {
-        "lastModified": 1773149028,
-        "narHash": "sha256-W1kSR1M6mHx7L67VZIwKaniKPDkRcS4i2v8dncgzA4Q=",
+        "lastModified": 1782464133,
+        "narHash": "sha256-92Ve3b5dY9lwc2yeje0SJMIQ42abFeg68meEeOsuGbI=",
         "owner": "jrl-umi3218",
         "repo": "mc_franka",
-        "rev": "bc25827bb14ec0bc326e2ec54629bbcf04bdb26d",
+        "rev": "31be811cc27cc50554aa03122230892696f5f027",
         "type": "github"
       },
       "original": {
